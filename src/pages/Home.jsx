@@ -1,19 +1,6 @@
 import React from 'react';
-import {
-  Image,
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  ImageBackground,
-  StatusBar,
-  Settings,
-  Button,
-} from 'react-native';
-import PlayButton from '../components/HomePageComponents/playButton';
-import InstructionButton from '../components/HomePageComponents/instructionButton';
-import SettingsButton from '../components/HomePageComponents/settingsButton';
+import {StyleSheet, View, ImageBackground, StatusBar} from 'react-native';
+import ButtonComponent from '../components/Buttons/MainButton';
 
 export default function Home({navigation}) {
   return (
@@ -23,21 +10,21 @@ export default function Home({navigation}) {
       <StatusBar backgroundColor={'#60e4f1'} />
 
       <View style={styles.buttonArea}>
-        <Pressable
+        <ButtonComponent
+          title="Play"
           onPress={() => navigation.navigate('GamePlay')}
-          style={styles.button}>
-          <PlayButton />
-        </Pressable>
-        <Pressable
+          image={require('../assets/HomePageAssets/Playbutton.png')}
+        />
+        <ButtonComponent
+          title="Instruction"
           onPress={() => navigation.navigate('Instruction')}
-          style={styles.button}>
-          <InstructionButton />
-        </Pressable>
-        <Pressable
+          image={require('../assets/HomePageAssets/Instructionbutton.png')}
+        />
+        <ButtonComponent
+          title="Settings"
           onPress={() => navigation.navigate('Settings')}
-          style={styles.button}>
-          <SettingsButton />
-        </Pressable>
+          image={require('../assets/HomePageAssets/SettingsButton.png')}
+        />
       </View>
     </ImageBackground>
   );
@@ -54,7 +41,10 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 10,
+    padding: 10,
     borderRadius: 30,
     backgroundColor: 'black',
+    width: 310,
+    height: 90,
   },
 });

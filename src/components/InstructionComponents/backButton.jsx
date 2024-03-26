@@ -1,12 +1,14 @@
 import React from 'react';
 import {Image, Pressable, StyleSheet, Text} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
-export default function backButton() {
+export default function BackButton({onPress}) {
   return (
     <Pressable style={styles.buttonArea}>
       <Image
         source={require('../../assets/InstructionPageAssets/BackButton.png')}
         style={styles.buttonImage}
+        onPress={onPress}
       />
     </Pressable>
   );

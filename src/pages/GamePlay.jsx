@@ -9,6 +9,7 @@ import {
   ImageBackground,
   StatusBar,
   Settings,
+  Modal,
 } from 'react-native';
 import HamburgerMenu from '../components/GamePlayComponents/hamburgerMenu';
 import GameBoard from '../components/GamePlayComponents/gameBoard';
@@ -19,13 +20,29 @@ import OButton from '../components/GamePlayComponents/O-button';
 import Menu from '../components/MenuComponents/Menu';
 
 export default function GamePlay() {
+  const [isModalVisible, setIsModalVisible] = React.useState(false);
   return (
     <ImageBackground
       source={require('../assets/GamePlayAssets/GamePlayBg.png')}
       style={styles.backgroundImage}>
       <StatusBar backgroundColor={'#60e4f1'} />
       <View>
-        <HamburgerMenu />
+        <Pressable
+          style={styles.hamburgerMenuArea}
+          title="Press"
+          onPress={() => {
+            setIsModalVisible(true);
+          }}>
+          <HamburgerMenu />
+        </Pressable>
+        <Modal
+          visible={isModalVisible}
+          onRequestClose={() => setIsModalVisible(false)}
+          transparent={true}>
+          <View>
+            <Menu />
+          </View>
+        </Modal>
         <SButton />
         <OButton />
         <View>
@@ -34,7 +51,6 @@ export default function GamePlay() {
         <PlayerOne />
         <PlayerTwo />
       </View>
-      <View>{/* <Menu /> */}</View>
     </ImageBackground>
   );
 }
@@ -44,5 +60,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  hamburgerMenuArea: {
+    position: 'absolute',
+    bottom: 350,
+    left: 130,
   },
 });
