@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Pressable, SafeAreaView, StyleSheet, View} from 'react-native';
+import { Image, Pressable, SafeAreaView, StyleSheet, View } from 'react-native';
 
 export default function SButton() {
   return (
@@ -12,7 +12,7 @@ export default function SButton() {
 const styles = StyleSheet.create({
   button: {
     position: 'absolute',
-    bottom: 210,
-    right: 60,
+    bottom: 40,
+    left: 35,
   },
 });

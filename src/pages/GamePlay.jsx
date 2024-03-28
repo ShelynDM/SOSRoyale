@@ -11,6 +11,7 @@ import {
   Settings,
   Modal,
 } from 'react-native';
+import App from '../components/GamePlayComponents/gameboardTicTacToe';
 import HamburgerMenu from '../components/GamePlayComponents/hamburgerMenu';
 import GameBoard from '../components/GamePlayComponents/gameBoard';
 import PlayerOne from '../components/GamePlayComponents/player1';
@@ -46,7 +47,7 @@ export default function GamePlay() {
         <SButton />
         <OButton />
         <View>
-          <GameBoard />
+          <App />
         </View>
         <PlayerOne />
         <PlayerTwo />

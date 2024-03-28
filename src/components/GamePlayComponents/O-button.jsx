@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Pressable, SafeAreaView, StyleSheet, View} from 'react-native';
+import { Image, Pressable, SafeAreaView, StyleSheet, View } from 'react-native';
 
 export default function OButton() {
   return (
@@ -12,7 +12,7 @@ export default function OButton() {
 const styles = StyleSheet.create({
   button: {
     position: 'absolute',
-    bottom: 210,
-    left: 70,
+    bottom: 40,
+    left: 30,
   },
 });

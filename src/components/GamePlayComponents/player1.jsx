@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Pressable, SafeAreaView, StyleSheet, View} from 'react-native';
+import { Image, Pressable, SafeAreaView, StyleSheet, View } from 'react-native';
 
 export default function PlayerOne() {
   return (
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   playerIconArea: {
     position: 'absolute',
     flexDirection: 'row',
-    top: 260,
+    top: 650,
     right: 50,
   },
 });
