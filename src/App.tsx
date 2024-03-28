@@ -1,29 +1,8 @@
 import React from 'react';
-import {
-  Image,
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  View,
-  StatusBar,
-} from 'react-native';
 import Home from './pages/Home';
 import Instruction from './pages/Instruction';
 import GamePlay from './pages/GamePlay';
-import Settings from './pages/Settings';
-
-// export default function App() {
-//   return (
-//     <>
-//       <SafeAreaView style={{flex: 1}}>
-//         <Home />
-//         {/* <Instruction /> */}
-//         {/* <GamePlay /> */}
-//         {/* <Settings /> */}
-//       </SafeAreaView>
-//     </>
-//   );
-// }
+import About from './pages/About';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -50,8 +29,8 @@ export default function App() {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Settings"
-          component={Settings}
+          name="About"
+          component={About}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

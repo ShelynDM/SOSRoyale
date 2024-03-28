@@ -10,10 +10,10 @@ import {
   StatusBar,
   Settings,
 } from 'react-native';
-import BackButton from '../components/InstructionComponents/backButton';
 import InstructionText from '../components/InstructionComponents/instructionText';
 import NextTextButton from '../components/InstructionComponents/nextTextButton';
 import BackTextButton from '../components/InstructionComponents/backTextButton';
+import BackButtonComponent from '../components/Buttons/BackButton';
 
 export default function Instruction({navigation}) {
   return (
@@ -22,14 +22,18 @@ export default function Instruction({navigation}) {
       style={styles.backgroundImage}>
       <StatusBar backgroundColor={'#60e4f1'} />
       <View>
-        <Pressable
-          onPress={() => navigation.navigate('Home')}
-          style={styles.button}></Pressable>
-        <BackButton />
-
+        <BackButtonComponent
+          title="BackButton"
+          onPress={() => navigation.goBack()}
+          image={require('../assets/InstructionPageAssets/BackButton.png')}
+        />
         <InstructionText />
-        <NextTextButton />
-        <BackTextButton />
+        <Pressable>
+          <NextTextButton />
+        </Pressable>
+        <Pressable>
+          <BackTextButton />
+        </Pressable>
       </View>
     </ImageBackground>
   );

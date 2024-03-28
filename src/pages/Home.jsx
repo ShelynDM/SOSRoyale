@@ -21,9 +21,9 @@ export default function Home({navigation}) {
           image={require('../assets/HomePageAssets/Instructionbutton.png')}
         />
         <ButtonComponent
-          title="Settings"
-          onPress={() => navigation.navigate('Settings')}
-          image={require('../assets/HomePageAssets/SettingsButton.png')}
+          title="About"
+          onPress={() => navigation.navigate('About')}
+          image={require('../assets/HomePageAssets/AboutButton.png')}
         />
       </View>
     </ImageBackground>

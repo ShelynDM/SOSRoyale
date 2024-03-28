@@ -10,17 +10,40 @@ import {
   StatusBar,
   Settings,
   Modal,
+  Button,
 } from 'react-native';
-import HamburgerMenu from '../components/GamePlayComponents/hamburgerMenu';
 import GameBoard from '../components/GamePlayComponents/gameBoard';
 import PlayerOne from '../components/GamePlayComponents/player1';
 import PlayerTwo from '../components/GamePlayComponents/player2';
 import SButton from '../components/GamePlayComponents/S-button';
 import OButton from '../components/GamePlayComponents/O-button';
-import Menu from '../components/MenuComponents/Menu';
+import Menu from '../components/GamePlayComponents/Menu';
+import {useNavigation} from '@react-navigation/native';
 
 export default function GamePlay() {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const nav = useNavigation();
+
+  const handleResumePress = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleInstructionsPress = () => {
+    setIsModalVisible(false);
+    nav.navigate('Instruction');
+  };
+
+  const handleAboutPress = () => {
+    setIsModalVisible(false);
+    nav.navigate('About');
+  };
+
+  const handleExitPress = () => {
+    setIsModalVisible(false);
+    // call a function to reset the game here
+    nav.navigate('Home');
+  };
+
   return (
     <ImageBackground
       source={require('../assets/GamePlayAssets/GamePlayBg.png')}
@@ -33,14 +56,26 @@ export default function GamePlay() {
           onPress={() => {
             setIsModalVisible(true);
           }}>
-          <HamburgerMenu />
+          <View>
+            {isModalVisible ? null : (
+              <View>
+                <Image
+                  source={require('../assets/GamePlayAssets/hamburgerMenu.png')}></Image>
+              </View>
+            )}
+          </View>
         </Pressable>
         <Modal
           visible={isModalVisible}
           onRequestClose={() => setIsModalVisible(false)}
           transparent={true}>
           <View>
-            <Menu />
+            <Menu
+              onInstructionsPress={handleInstructionsPress}
+              onAboutPress={handleAboutPress}
+              onExitPress={handleExitPress}
+              onResumePress={handleResumePress}
+            />
           </View>
         </Modal>
         <SButton />
