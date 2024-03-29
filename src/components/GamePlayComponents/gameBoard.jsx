@@ -98,7 +98,7 @@ export default function GameBoard() {
       sosCount++;
       if (sosCount > 0 && h3 === 0) {
         updateScore();
-        setV3(1);
+        setH3(1);
       }
     }
 
@@ -139,7 +139,11 @@ export default function GameBoard() {
 
   // Check if the game is over and display the winner
   const handleGameOver = () => {
-    if (board[0].every(cell => cell !== '')) {
+    if (
+      board[0].every(cell => cell !== '') &&
+      board[1].every(cell => cell !== '') &&
+      board[2].every(cell => cell !== '')
+    ) {
       setGameOver(true);
     }
 
@@ -213,12 +217,14 @@ export default function GameBoard() {
   React.useEffect(() => {
     console.log('Player 1 Score:', player1);
     handleGameOver();
-  }, [player1]); // This will log the player1 score whenever it changes
+    setCurrentPlayer(1);
+  }, [player1, gameOver]); // This will log the player1 score whenever it changes
 
   React.useEffect(() => {
     console.log('Player 2 Score:', player2);
     handleGameOver();
-  }, [player2]); // This will log the player2 score whenever it changes
+    setCurrentPlayer(2);
+  }, [player2, gameOver]); // This will log the player2 score whenever it changes
 
   return (
     <View>
@@ -257,6 +263,56 @@ export default function GameBoard() {
             </View>
           ))}
         </View>
+        <View>
+          {h1 === 1 ? (
+            <Image
+              source={require('../../assets/GamePlayAssets/horizontal.png')}
+              style={styles.h1Marker}
+            />
+          ) : null}
+          {h2 === 1 ? (
+            <Image
+              source={require('../../assets/GamePlayAssets/horizontal.png')}
+              style={styles.h2Marker}
+            />
+          ) : null}
+          {h3 === 1 ? (
+            <Image
+              source={require('../../assets/GamePlayAssets/horizontal.png')}
+              style={styles.h3Marker}
+            />
+          ) : null}
+          {v1 === 1 ? (
+            <Image
+              source={require('../../assets/GamePlayAssets/vertical.png')}
+              style={styles.v1Marker}
+            />
+          ) : null}
+          {v2 === 1 ? (
+            <Image
+              source={require('../../assets/GamePlayAssets/vertical.png')}
+              style={styles.v2Marker}
+            />
+          ) : null}
+          {v3 === 1 ? (
+            <Image
+              source={require('../../assets/GamePlayAssets/vertical.png')}
+              style={styles.v3Marker}
+            />
+          ) : null}
+          {/* {d1 === 1 ? (
+            <Image
+              source={require('../../assets/GamePlayAssets/d1.png')}
+              style={styles.d1Marker}
+            />
+          ) : null}
+          {d2 === 1 ? (
+            <Image
+              source={require('../../assets/GamePlayAssets/d2.png')}
+              style={styles.d2Marker}
+            />
+          ) : null} */}
+        </View>
         <View style={styles.controls}>
           <Text>Current Player: {currentPlayer}</Text>
           <Button title="Reset" onPress={handleReset} />
@@ -264,12 +320,14 @@ export default function GameBoard() {
         <View style={styles.score}>
           <View>
             <Text style={styles.scoreText}>{player1}</Text>
-            <Text style={styles.scoreText}>Player 1</Text>
           </View>
           <View>
             <Text style={styles.scoreText}>{player2}</Text>
-            <Text style={styles.scoreText}>Player 2</Text>
           </View>
+        </View>
+        <View style={styles.playerText}>
+          <Text style={styles.scoreText}>Player 1</Text>
+          <Text style={styles.scoreText}>Player 2</Text>
         </View>
       </ImageBackground>
     </View>
@@ -277,6 +335,47 @@ export default function GameBoard() {
 }
 
 const styles = StyleSheet.create({
+  h1Marker: {
+    position: 'absolute',
+    bottom: 280,
+    right: -160,
+  },
+  h2Marker: {
+    position: 'absolute',
+    bottom: 195,
+    right: -160,
+  },
+  h3Marker: {
+    position: 'absolute',
+    bottom: 105,
+    right: -160,
+  },
+  v1Marker: {
+    position: 'absolute',
+    bottom: 40,
+    right: 80,
+  },
+  v2Marker: {
+    position: 'absolute',
+    bottom: 40,
+    right: -5,
+  },
+  v3Marker: {
+    position: 'absolute',
+    bottom: 40,
+    right: -90,
+  },
+  d1Marker: {
+    position: 'absolute',
+    bottom: 80,
+    right: -115,
+  },
+
+  d2Marker: {
+    position: 'absolute',
+    bottom: 80,
+    right: -115,
+  },
   SButton: {
     position: 'absolute',
     bottom: 210,
@@ -293,10 +392,20 @@ const styles = StyleSheet.create({
   },
   score: {
     position: 'absolute',
-    bottom: 0,
+    bottom: -85,
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    left: 95,
+    gap: 135,
+    textAlign: 'center',
+  },
+  playerText: {
+    position: 'absolute',
+    bottom: -40,
+    width: '100%',
+    flexDirection: 'row',
+    left: 65,
+    gap: 70,
   },
   controls: {
     position: 'absolute',

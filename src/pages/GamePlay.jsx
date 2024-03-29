@@ -13,8 +13,6 @@ import {
   Button,
 } from 'react-native';
 import GameBoard from '../components/GamePlayComponents/gameBoard';
-import PlayerOne from '../components/GamePlayComponents/player1';
-import PlayerTwo from '../components/GamePlayComponents/player2';
 // import SButton from '../components/GamePlayComponents/S-button';
 // import OButton from '../components/GamePlayComponents/O-button';
 import Menu from '../components/GamePlayComponents/Menu';
@@ -46,7 +44,7 @@ export default function GamePlay() {
 
   return (
     <ImageBackground
-      source={require('../assets/GamePlayAssets/GamePlayBg.png')}
+      source={require('../assets/GamePlayAssets/GamePlayPage.png')}
       style={styles.backgroundImage}>
       <StatusBar backgroundColor={'#60e4f1'} />
       <View>
@@ -83,8 +81,6 @@ export default function GamePlay() {
         <View>
           <GameBoard />
         </View>
-        <PlayerOne />
-        <PlayerTwo />
       </View>
     </ImageBackground>
   );
