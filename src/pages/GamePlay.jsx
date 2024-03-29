@@ -15,8 +15,8 @@ import {
 import GameBoard from '../components/GamePlayComponents/gameBoard';
 import PlayerOne from '../components/GamePlayComponents/player1';
 import PlayerTwo from '../components/GamePlayComponents/player2';
-import SButton from '../components/GamePlayComponents/S-button';
-import OButton from '../components/GamePlayComponents/O-button';
+// import SButton from '../components/GamePlayComponents/S-button';
+// import OButton from '../components/GamePlayComponents/O-button';
 import Menu from '../components/GamePlayComponents/Menu';
 import {useNavigation} from '@react-navigation/native';
 
@@ -78,8 +78,8 @@ export default function GamePlay() {
             />
           </View>
         </Modal>
-        <SButton />
-        <OButton />
+        {/* <SButton />
+        <OButton /> */}
         <View>
           <GameBoard />
         </View>
