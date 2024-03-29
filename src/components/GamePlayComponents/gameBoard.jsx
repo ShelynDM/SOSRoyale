@@ -24,6 +24,8 @@ export default function GameBoard() {
     ['', '', ''],
     ['', '', ''],
   ]);
+
+  // identifies which row or column where SOS is formed
   const [h1, setH1] = React.useState(0);
   const [h2, setH2] = React.useState(0);
   const [h3, setH3] = React.useState(0);
@@ -42,61 +44,69 @@ export default function GameBoard() {
   // let d1 = 0;
   // let d2 = 0;
 
+  // Check if the player has formed SOS
   const checkWinner = () => {
     let sosCount = 0;
 
+    // Checking for first vertical column SOS
     if (board[0][0] === 'S' && board[0][1] === 'O' && board[0][2] === 'S') {
       sosCount++;
+      // If SOS is formed in the first column and it is the first time, update the score
       if (sosCount > 0 && v1 === 0) {
         updateScore();
-        setV1(1);
+        setV1(1); // set the value of v1 to 1 to indicate that SOS is formed in the first vertical column so that the score is not updated again
       }
     }
+    // Checking for second vertical column SOS
     if (board[1][0] === 'S' && board[1][1] === 'O' && board[1][2] === 'S') {
       sosCount++;
       if (sosCount > 0 && v2 === 0) {
         updateScore();
-
         setV2(1);
       }
     }
+
+    // Checking for third vertical column SOS
     if (board[2][0] === 'S' && board[2][1] === 'O' && board[2][2] === 'S') {
       sosCount++;
       if (sosCount > 0 && v3 === 0) {
         updateScore();
-
         setV3(1);
       }
     }
+
+    // Check for first horizontal row SOS
     if (board[0][0] === 'S' && board[1][0] === 'O' && board[2][0] === 'S') {
       sosCount++;
       if (sosCount > 0 && h1 === 0) {
         updateScore();
-
         setH1(1);
       }
     }
+
+    // Check for second horizontal row SOS
     if (board[0][1] === 'S' && board[1][1] === 'O' && board[2][1] === 'S') {
       sosCount++;
       if (sosCount > 0 && h2 === 0) {
         updateScore();
-
         setH2(1);
       }
     }
+
+    // Check for third horizontal row SOS
     if (board[0][2] === 'S' && board[1][2] === 'O' && board[2][2] === 'S') {
       sosCount++;
       if (sosCount > 0 && h3 === 0) {
         updateScore();
-
         setV3(1);
       }
     }
+
+    // Check for diagonal SOS (top-left to bottom-right)
     if (board[0][0] === 'S' && board[1][1] === 'O' && board[2][2] === 'S') {
       sosCount++;
       if (sosCount > 0 && d1 === 0) {
         updateScore();
-
         setD1(1);
       }
     }
@@ -106,16 +116,19 @@ export default function GameBoard() {
       sosCount++;
       if (sosCount > 0 && d2 === 0) {
         updateScore();
-
         setD2(1);
       }
     }
 
+    // Set the current player to the other player
     setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
+
+    // Checking, should be removed later
     console.log(sosCount);
     console.log('SOS Count:', sosCount);
   };
 
+  // Update the score of the player who formed the SOS
   const updateScore = () => {
     if (currentPlayer === 1) {
       setPlayer1(player1 + 1);
@@ -124,6 +137,7 @@ export default function GameBoard() {
     }
   };
 
+  // Check if the game is over and display the winner
   const handleGameOver = () => {
     if (board[0].every(cell => cell !== '')) {
       setGameOver(true);
@@ -140,14 +154,17 @@ export default function GameBoard() {
     }
   };
 
+  // Handle the press event on the grid
   const handlePress = (i, j) => {
+    // If the cell is empty, update the board
     if (board[i][j] === '') {
       let newBoard = [...board];
       newBoard[i][j] = letter;
       setBoard(newBoard);
-      checkWinner();
+      checkWinner(); // Check if the player has formed SOS
     }
 
+    // If the cell is not empty, alert the player to pick a letter
     if (board[i][j] === '') {
       if (letter === '') {
         alert('Pick a letter first (S or O).');
@@ -155,12 +172,16 @@ export default function GameBoard() {
       }
     }
   };
+
+  // Checking, should be removed later
   console.log('text');
   console.log('h1=', h1, 'h2=', h2, 'h3=', h3);
   console.log('v1=', v1, 'v2=', v2, 'v3=', v3);
   console.log('d1=', d1, 'd2=', d2);
   console.log(player1);
   console.log(player2);
+
+  // Reset the game
   const handleReset = () => {
     setBoard([
       ['', '', ''],
@@ -182,6 +203,7 @@ export default function GameBoard() {
     setD2(0);
   };
 
+  // Handle the selection of the letter
   const handleLetterSelection = selectedLetter => {
     if (!gameOver) {
       setLetter(selectedLetter);
