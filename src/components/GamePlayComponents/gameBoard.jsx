@@ -43,14 +43,13 @@ export default function GameBoard() {
   // let v3 = 0;
   // let d1 = 0;
   // let d2 = 0;
+  let sosCount = 0;
 
   // Check if the player has formed SOS
   const checkSOS = () => {
-    //let sosCount = 0;
-
     // Checking for first vertical column SOS
     if (board[0][0] === 'S' && board[0][1] === 'O' && board[0][2] === 'S') {
-      //sosCount++;
+      sosCount++;
       // If SOS is formed in the first column and it is the first time, update the score
       // if (sosCount > 0 && v1 === 0) {
       if (v1 === 0) {
@@ -60,7 +59,7 @@ export default function GameBoard() {
     }
     // Checking for second vertical column SOS
     if (board[1][0] === 'S' && board[1][1] === 'O' && board[1][2] === 'S') {
-      //sosCount++;
+      sosCount++;
       // if (sosCount > 0 && v2 === 0) {
       if (v2 === 0) {
         updateScore();
@@ -70,7 +69,7 @@ export default function GameBoard() {
 
     // Checking for third vertical column SOS
     if (board[2][0] === 'S' && board[2][1] === 'O' && board[2][2] === 'S') {
-      //sosCount++;
+      sosCount++;
       // if (sosCount > 0 && v3 === 0) {
       if (v3 === 0) {
         updateScore();
@@ -80,7 +79,7 @@ export default function GameBoard() {
 
     // Check for first horizontal row SOS
     if (board[0][0] === 'S' && board[1][0] === 'O' && board[2][0] === 'S') {
-      //sosCount++;
+      sosCount++;
       // if (sosCount > 0 && h1 === 0) {
       if (h1 === 0) {
         updateScore();
@@ -90,7 +89,7 @@ export default function GameBoard() {
 
     // Check for second horizontal row SOS
     if (board[0][1] === 'S' && board[1][1] === 'O' && board[2][1] === 'S') {
-      //sosCount++;
+      sosCount++;
       // if (sosCount > 0 && h2 === 0) {
       if (h2 === 0) {
         updateScore();
@@ -100,7 +99,7 @@ export default function GameBoard() {
 
     // Check for third horizontal row SOS
     if (board[0][2] === 'S' && board[1][2] === 'O' && board[2][2] === 'S') {
-      //sosCount++;
+      sosCount++;
       // if (sosCount > 0 && h3 === 0) {
       if (h3 === 0) {
         updateScore();
@@ -110,7 +109,7 @@ export default function GameBoard() {
 
     // Check for diagonal SOS (top-left to bottom-right)
     if (board[0][0] === 'S' && board[1][1] === 'O' && board[2][2] === 'S') {
-      //sosCount++;
+      sosCount++;
       // if (sosCount > 0 && d1 === 0) {
       if (d1 === 0) {
         updateScore();
@@ -120,7 +119,7 @@ export default function GameBoard() {
 
     // Check for diagonal SOS (bottom-left to top-right)
     if (board[2][0] === 'S' && board[1][1] === 'O' && board[0][2] === 'S') {
-      //sosCount++;
+      sosCount++;
       // if (sosCount > 0 && d2 === 0) {
       if (d2 === 0) {
         updateScore();
@@ -133,16 +132,26 @@ export default function GameBoard() {
 
     // Checking, should be removed later
     // console.log(sosCount);
-    // console.log('SOS Count:', sosCount);
+    console.log('SOS Count:', sosCount);
   };
 
   // Update the score of the player who formed the SOS
   const updateScore = () => {
-    if (currentPlayer === 1) {
-      setPlayer1(player1 + 1);
-    } else {
-      setPlayer2(player2 + 1);
+    let score = player1 + player2;
+    if (score < sosCount) {
+      score = sosCount - score;
+    } else if (score === sosCount) {
+      score = 1;
     }
+
+    if (currentPlayer === 1) {
+      setPlayer1(player1 + score);
+    } else {
+      setPlayer2(player2 + score);
+    }
+
+    console.log('Score:', score);
+    //console.log('Total Score:', totalScore);
   };
 
   // Check if the game is over and display the winner
@@ -355,8 +364,8 @@ export default function GameBoard() {
             />
           ) : null}
         </View>
-        <View style={styles.controls}>
-          <Text>Current Player: {currentPlayer}</Text>
+        <View style={styles.resetControls}>
+          {/* <Text>Current Player: {currentPlayer}</Text> */}
           <Pressable onPress={handleReset}>
             <Image
               source={require('../../assets/GamePlayAssets/ResetButton.png')}
@@ -494,12 +503,11 @@ const styles = StyleSheet.create({
     bottom: -110,
     right: -170,
   },
-  controls: {
+  resetControls: {
     position: 'absolute',
-    top: 15,
+    top: 25,
+    left: 235,
     width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
   },
   marker: {
     width: 40,
