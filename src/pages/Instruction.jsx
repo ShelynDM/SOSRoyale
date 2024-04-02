@@ -1,39 +1,24 @@
 import React from 'react';
-import {
-  Image,
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  ImageBackground,
-  StatusBar,
-  Settings,
-} from 'react-native';
-import InstructionText from '../components/InstructionComponents/instructionText';
+import {ImageBackground, StatusBar, StyleSheet, View} from 'react-native';
+import BackButton from '../components/InstructionComponents/backButton';
 import NextTextButton from '../components/InstructionComponents/nextTextButton';
-import BackTextButton from '../components/InstructionComponents/backTextButton';
-import BackButtonComponent from '../components/Buttons/BackButton';
+import {useNavigation} from '@react-navigation/native';
 
-export default function Instruction({navigation}) {
+export default function Instruction() {
+  const navigation = useNavigation();
+
+  const navigateToScreen2 = () => {
+    navigation.navigate('Screen2');
+  };
+
   return (
     <ImageBackground
-      source={require('../assets/InstructionPageAssets/InstructionPageBackground.png')}
+      source={require('../assets/InstructionPageAssets/InstructionsPage1.png')}
       style={styles.backgroundImage}>
       <StatusBar backgroundColor={'#60e4f1'} />
       <View>
-        <BackButtonComponent
-          title="BackButton"
-          onPress={() => navigation.goBack()}
-          image={require('../assets/InstructionPageAssets/BackButton.png')}
-        />
-        <InstructionText />
-        <Pressable>
-          <NextTextButton />
-        </Pressable>
-        <Pressable>
-          <BackTextButton />
-        </Pressable>
+        <BackButton onPress={() => navigation.goBack()} />
+        <NextTextButton onPress={navigateToScreen2} />
       </View>
     </ImageBackground>
   );
@@ -44,12 +29,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  button: {
-    position: 'absolute',
-    backgroundColor: 'black',
-    borderRadius: 15,
-    bottom: 340,
-    right: 120,
   },
 });

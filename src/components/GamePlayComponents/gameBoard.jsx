@@ -350,7 +350,10 @@ export default function GameBoard() {
         <View style={styles.resetControls}>
           <Pressable onPress={handleReset}>
             {gameOver ? (
-              <Text>NewGame</Text>
+              <Image
+                source={require('../../assets/GamePlayAssets/NewGameButton.png')}
+                style={{right: 15}}
+              />
             ) : (
               <Image
                 source={require('../../assets/GamePlayAssets/ResetButton.png')}
