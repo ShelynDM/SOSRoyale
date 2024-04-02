@@ -11,11 +11,11 @@ import {
   Touchable,
 } from 'react-native';
 
-export default function SettingsButton() {
+export default function AboutButton() {
   return (
     <>
       <Image
-        source={require('../../assets/HomePageAssets/SettingsButton.png')}
+        source={require('../../assets/HomePageAssets/AboutButton.png')}
         style={styles.buttonImage}
       />
     </>

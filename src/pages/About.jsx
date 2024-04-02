@@ -5,27 +5,27 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import BackButton from '../components/InstructionComponents/backButton';
-import NextTextButton from '../components/InstructionComponents/nextTextButton';
+import BackButton from '../components/AboutComponent/backButton';
+import NextTextButton from '../components/AboutComponent/nextTextButton';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Instruction() {
   const navigation = useNavigation();
 
-  const navigateToScreen2 = () => {
-    navigation.navigate('Screen2');
+  const navigateToAboutScreen2 = () => {
+    navigation.navigate('AboutScreen2');
   };
 
   return (
     <ImageBackground
-      source={require('../assets/InstructionPageAssets/InstructionsPage1.png')}
+      source={require('../assets/AboutPageAssets/AboutPage.png')}
       style={styles.backgroundImage}>
       <StatusBar backgroundColor={'#60e4f1'} />
       <View>
         <BackButton 
           onPress={() => navigation.goBack()}
         />
-        <NextTextButton onPress={navigateToScreen2}/>
+        <NextTextButton onPress={navigateToAboutScreen2}/>
       </View>
     </ImageBackground>
   );

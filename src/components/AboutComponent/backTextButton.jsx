@@ -1,11 +1,11 @@
 import React from 'react';
 import {Image, Pressable, StyleSheet, Text} from 'react-native';
 
-export default function BackButton() {
+export default function BackTextButton({ onPress }) {
   return (
-    <Pressable style={styles.buttonArea}>
+    <Pressable style={styles.buttonArea} onPress={onPress}>
       <Image
-        source={require('../../assets/InstructionPageAssets/BackButton.png')}
+        source={require('../../assets/AboutPageAssets/BackTextButton.png')}
         style={styles.buttonImage}
       />
     </Pressable>
@@ -14,14 +14,12 @@ export default function BackButton() {
 
 const styles = StyleSheet.create({
   buttonImage: {
-    width: 55,
-    height: 43,
+    width: 65,
+    height: 20,
   },
   buttonArea: {
     position: 'absolute',
-    backgroundColor: 'black',
-    borderRadius: 15,
-    bottom: 340,
-    right: 120,
+    top: 90,
+    right: 60,
   },
 });

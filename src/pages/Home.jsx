@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import PlayButton from '../components/HomePageComponents/playButton';
 import InstructionButton from '../components/HomePageComponents/instructionButton';
-import SettingsButton from '../components/HomePageComponents/settingsButton';
+import AboutButton from '../components/HomePageComponents/aboutButton';
 
 export default function Home({navigation}) {
   return (
@@ -34,9 +34,9 @@ export default function Home({navigation}) {
           <InstructionButton />
         </Pressable>
         <Pressable
-          onPress={() => navigation.navigate('Settings')}
+          onPress={() => navigation.navigate('About')}
           style={styles.button}>
-          <SettingsButton />
+          <AboutButton />
         </Pressable>
       </View>
     </ImageBackground>
