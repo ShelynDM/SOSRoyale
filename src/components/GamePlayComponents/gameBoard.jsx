@@ -33,8 +33,36 @@ export default function GameBoard() {
   const [d1, setD1] = React.useState(0);
   const [d2, setD2] = React.useState(0);
 
-  let sosCount = 0;
+  // Handle the selection of the letter
+  const handleLetterSelection = selectedLetter => {
+    if (!gameOver) {
+      setLetter(selectedLetter);
+    }
+  };
 
+  // Handle the press event on the grid
+  const handlePress = (i, j) => {
+    // If the cell is empty, update the board
+    if (board[i][j] === '') {
+      let newBoard = [...board];
+      newBoard[i][j] = letter;
+      setBoard(newBoard);
+      // Check if the player has formed SOS
+      checkSOS();
+    }
+
+    // If the cell is not empty, alert the player to pick a letter
+    if (board[i][j] === '') {
+      if (letter === '') {
+        setCurrentPlayer(1);
+        alert('Pick a letter first (S or O).');
+        return;
+      }
+    }
+  };
+
+  // Initialization to check the SOS count on the board
+  let sosCount = 0;
   // Check if the player has formed SOS
   const checkSOS = () => {
     // Helper function to check for SOS and update state accordingly
@@ -113,6 +141,7 @@ export default function GameBoard() {
       setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
     }
 
+    // Checking log of SOS count, should be removed later
     console.log('SOS Count:', sosCount);
   };
 
@@ -129,19 +158,7 @@ export default function GameBoard() {
     console.log('Player1: ' + player1 + ' Player2: ' + player2);
   };
 
-  // Check if the game is over and display the winner
-  const handleGameOver = () => {
-    if (
-      board[0].every(cell => cell !== '') &&
-      board[1].every(cell => cell !== '') &&
-      board[2].every(cell => cell !== '')
-    ) {
-      checkSOS();
-      setGameOver(true);
-      determineWinner();
-    }
-  };
-
+  // Determine the winner of the game
   const determineWinner = () => {
     if (gameOver) {
       if (player1 > player2) {
@@ -157,33 +174,18 @@ export default function GameBoard() {
     }
   };
 
-  // Handle the press event on the grid
-  const handlePress = (i, j) => {
-    // If the cell is empty, update the board
-    if (board[i][j] === '') {
-      let newBoard = [...board];
-      newBoard[i][j] = letter;
-      setBoard(newBoard);
-      // Check if the player has formed SOS
+  // Check if the game is over and display the winner
+  const handleGameOver = () => {
+    if (
+      board[0].every(cell => cell !== '') &&
+      board[1].every(cell => cell !== '') &&
+      board[2].every(cell => cell !== '')
+    ) {
       checkSOS();
-    }
-
-    // If the cell is not empty, alert the player to pick a letter
-    if (board[i][j] === '') {
-      if (letter === '') {
-        setCurrentPlayer(1);
-        alert('Pick a letter first (S or O).');
-        return;
-      }
+      setGameOver(true);
+      determineWinner();
     }
   };
-
-  // Checking, should be removed later
-  console.log('h1=', h1, 'h2=', h2, 'h3=', h3);
-  console.log('v1=', v1, 'v2=', v2, 'v3=', v3);
-  console.log('d1=', d1, 'd2=', d2);
-  console.log(player1);
-  console.log(player2);
 
   // Reset the game
   const handleReset = () => {
@@ -207,22 +209,23 @@ export default function GameBoard() {
     setD2(0);
   };
 
-  // Handle the selection of the letter
-  const handleLetterSelection = selectedLetter => {
-    if (!gameOver) {
-      setLetter(selectedLetter);
-    }
-  };
+  // Checking, should be removed later
+  console.log('h1=', h1, 'h2=', h2, 'h3=', h3);
+  console.log('v1=', v1, 'v2=', v2, 'v3=', v3);
+  console.log('d1=', d1, 'd2=', d2);
+  console.log(player1);
+  console.log(player2);
 
   // Every time the board changes, the function inside the useEffect will run
   React.useEffect(() => {
     console.log('Player 1 Score:', player1);
     console.log('Player 2 Score:', player2);
     handleGameOver();
-  }, [board, gameOver]); // This will log the player1 score whenever it changes
+  }, [board, gameOver]);
 
   return (
     <View>
+      {/* Buttons for letter selection S and O. */}
       <View>
         <Pressable
           style={styles.SButton}
@@ -267,6 +270,8 @@ export default function GameBoard() {
           )}
         </Pressable>
       </View>
+
+      {/* Game board */}
       <ImageBackground
         source={require('../../assets/GamePlayAssets/3x3Board.png')}
         style={styles.backgroundImage}>
@@ -288,6 +293,8 @@ export default function GameBoard() {
             </View>
           ))}
         </View>
+
+        {/* Line markers for SOS */}
         <View>
           {h1 === 1 ? (
             <Image
@@ -338,6 +345,8 @@ export default function GameBoard() {
             />
           ) : null}
         </View>
+
+        {/* Reset button */}
         <View style={styles.resetControls}>
           <Pressable onPress={handleReset}>
             {gameOver ? (
@@ -349,6 +358,8 @@ export default function GameBoard() {
             )}
           </Pressable>
         </View>
+
+        {/* Score and player icons */}
         <View style={styles.score}>
           <View>
             <Text style={styles.scoreText}>{player1}</Text>
