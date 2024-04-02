@@ -3,19 +3,17 @@ import {
   Image,
   ImageBackground,
   Pressable,
-  SafeAreaView,
   StyleSheet,
   View,
   Text,
-  Button,
 } from 'react-native';
 
 import SMarker from '../../assets/GamePlayAssets/s.png';
 import OMarker from '../../assets/GamePlayAssets/o.png';
 
 export default function GameBoard() {
-  const [player1, setPlayer1] = React.useState(0);
-  const [player2, setPlayer2] = React.useState(0);
+  const [player1, setPlayer1] = React.useState(0); //player1 score
+  const [player2, setPlayer2] = React.useState(0); //player2 score
   const [currentPlayer, setCurrentPlayer] = React.useState(1);
   const [gameOver, setGameOver] = React.useState(false);
   const [letter, setLetter] = React.useState('');
@@ -35,123 +33,100 @@ export default function GameBoard() {
   const [d1, setD1] = React.useState(0);
   const [d2, setD2] = React.useState(0);
 
-  // let h1 = 0;
-  // let h2 = 0;
-  // let h3 = 0;
-  // let v1 = 0;
-  // let v2 = 0;
-  // let v3 = 0;
-  // let d1 = 0;
-  // let d2 = 0;
   let sosCount = 0;
 
   // Check if the player has formed SOS
   const checkSOS = () => {
-    // Checking for first vertical column SOS
-    if (board[0][0] === 'S' && board[0][1] === 'O' && board[0][2] === 'S') {
-      sosCount++;
-      // If SOS is formed in the first column and it is the first time, update the score
-      // if (sosCount > 0 && v1 === 0) {
-      if (v1 === 0) {
+    // Helper function to check for SOS and update state accordingly
+    const checkAndUpdate = (condition, setter) => {
+      if (condition) {
+        sosCount++;
         updateScore();
-        setV1(1); // set the value of v1 to 1 to indicate that SOS is formed in the first vertical column so that the score is not updated again
+        setter(1);
       }
-    }
-    // Checking for second vertical column SOS
-    if (board[1][0] === 'S' && board[1][1] === 'O' && board[1][2] === 'S') {
-      sosCount++;
-      // if (sosCount > 0 && v2 === 0) {
-      if (v2 === 0) {
-        updateScore();
-        setV2(1);
-      }
-    }
+    };
 
-    // Checking for third vertical column SOS
-    if (board[2][0] === 'S' && board[2][1] === 'O' && board[2][2] === 'S') {
-      sosCount++;
-      // if (sosCount > 0 && v3 === 0) {
-      if (v3 === 0) {
-        updateScore();
-        setV3(1);
-      }
-    }
+    // Checking for vertical columns
+    checkAndUpdate(
+      board[0][0] === 'S' &&
+        board[0][1] === 'O' &&
+        board[0][2] === 'S' &&
+        v1 === 0,
+      setV1,
+    );
+    checkAndUpdate(
+      board[1][0] === 'S' &&
+        board[1][1] === 'O' &&
+        board[1][2] === 'S' &&
+        v2 === 0,
+      setV2,
+    );
+    checkAndUpdate(
+      board[2][0] === 'S' &&
+        board[2][1] === 'O' &&
+        board[2][2] === 'S' &&
+        v3 === 0,
+      setV3,
+    );
 
-    // Check for first horizontal row SOS
-    if (board[0][0] === 'S' && board[1][0] === 'O' && board[2][0] === 'S') {
-      sosCount++;
-      // if (sosCount > 0 && h1 === 0) {
-      if (h1 === 0) {
-        updateScore();
-        setH1(1);
-      }
-    }
+    // Checking for horizontal rows
+    checkAndUpdate(
+      board[0][0] === 'S' &&
+        board[1][0] === 'O' &&
+        board[2][0] === 'S' &&
+        h1 === 0,
+      setH1,
+    );
+    checkAndUpdate(
+      board[0][1] === 'S' &&
+        board[1][1] === 'O' &&
+        board[2][1] === 'S' &&
+        h2 === 0,
+      setH2,
+    );
+    checkAndUpdate(
+      board[0][2] === 'S' &&
+        board[1][2] === 'O' &&
+        board[2][2] === 'S' &&
+        h3 === 0,
+      setH3,
+    );
 
-    // Check for second horizontal row SOS
-    if (board[0][1] === 'S' && board[1][1] === 'O' && board[2][1] === 'S') {
-      sosCount++;
-      // if (sosCount > 0 && h2 === 0) {
-      if (h2 === 0) {
-        updateScore();
-        setH2(1);
-      }
-    }
+    // Checking for diagonals
+    checkAndUpdate(
+      board[0][0] === 'S' &&
+        board[1][1] === 'O' &&
+        board[2][2] === 'S' &&
+        d1 === 0,
+      setD1,
+    );
+    checkAndUpdate(
+      board[2][0] === 'S' &&
+        board[1][1] === 'O' &&
+        board[0][2] === 'S' &&
+        d2 === 0,
+      setD2,
+    );
 
-    // Check for third horizontal row SOS
-    if (board[0][2] === 'S' && board[1][2] === 'O' && board[2][2] === 'S') {
-      sosCount++;
-      // if (sosCount > 0 && h3 === 0) {
-      if (h3 === 0) {
-        updateScore();
-        setH3(1);
-      }
-    }
-
-    // Check for diagonal SOS (top-left to bottom-right)
-    if (board[0][0] === 'S' && board[1][1] === 'O' && board[2][2] === 'S') {
-      sosCount++;
-      // if (sosCount > 0 && d1 === 0) {
-      if (d1 === 0) {
-        updateScore();
-        setD1(1);
-      }
-    }
-
-    // Check for diagonal SOS (bottom-left to top-right)
-    if (board[2][0] === 'S' && board[1][1] === 'O' && board[0][2] === 'S') {
-      sosCount++;
-      // if (sosCount > 0 && d2 === 0) {
-      if (d2 === 0) {
-        updateScore();
-        setD2(1);
-      }
+    if (sosCount === 0) {
+      // Set the current player to the other player
+      setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
     }
 
-    // Set the current player to the other player
-    setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
-
-    // Checking, should be removed later
-    // console.log(sosCount);
     console.log('SOS Count:', sosCount);
   };
 
   // Update the score of the player who formed the SOS
   const updateScore = () => {
-    let score = player1 + player2;
-    if (score < sosCount) {
-      score = sosCount - score;
-    } else if (score === sosCount) {
-      score = 1;
-    }
+    console.log('Update score SOS Count', sosCount);
 
     if (currentPlayer === 1) {
-      setPlayer1(player1 + score);
+      setPlayer1(prevPlayer1 => prevPlayer1 + 1);
     } else {
-      setPlayer2(player2 + score);
+      setPlayer2(prevPlayer2 => prevPlayer2 + 1);
     }
 
-    console.log('Score:', score);
-    //console.log('Total Score:', totalScore);
+    console.log('Player1: ' + player1 + ' Player2: ' + player2);
   };
 
   // Check if the game is over and display the winner
@@ -161,6 +136,7 @@ export default function GameBoard() {
       board[1].every(cell => cell !== '') &&
       board[2].every(cell => cell !== '')
     ) {
+      checkSOS();
       setGameOver(true);
       determineWinner();
     }
@@ -169,10 +145,13 @@ export default function GameBoard() {
   const determineWinner = () => {
     if (gameOver) {
       if (player1 > player2) {
+        setCurrentPlayer(1);
         alert('Player 1 wins!');
       } else if (player2 > player1) {
+        setCurrentPlayer(2);
         alert('Player 2 wins!');
       } else {
+        setCurrentPlayer(null);
         alert('It is a tie!');
       }
     }
@@ -185,12 +164,14 @@ export default function GameBoard() {
       let newBoard = [...board];
       newBoard[i][j] = letter;
       setBoard(newBoard);
-      checkSOS(); // Check if the player has formed SOS
+      // Check if the player has formed SOS
+      checkSOS();
     }
 
     // If the cell is not empty, alert the player to pick a letter
     if (board[i][j] === '') {
       if (letter === '') {
+        setCurrentPlayer(1);
         alert('Pick a letter first (S or O).');
         return;
       }
@@ -233,19 +214,12 @@ export default function GameBoard() {
     }
   };
 
-  // Every time the player1 score changes, the function inside the useEffect will run
+  // Every time the board changes, the function inside the useEffect will run
   React.useEffect(() => {
     console.log('Player 1 Score:', player1);
-    handleGameOver();
-    setCurrentPlayer(1);
-  }, [player1, gameOver]); // This will log the player1 score whenever it changes
-
-  // Every time the player2 score changes, the function inside the useEffect will run
-  React.useEffect(() => {
     console.log('Player 2 Score:', player2);
     handleGameOver();
-    setCurrentPlayer(2);
-  }, [player2, gameOver]); // This will log the player2 score whenever it changes
+  }, [board, gameOver]); // This will log the player1 score whenever it changes
 
   return (
     <View>
@@ -365,13 +339,15 @@ export default function GameBoard() {
           ) : null}
         </View>
         <View style={styles.resetControls}>
-          {/* <Text>Current Player: {currentPlayer}</Text> */}
           <Pressable onPress={handleReset}>
-            <Image
-              source={require('../../assets/GamePlayAssets/ResetButton.png')}
-            />
+            {gameOver ? (
+              <Text>NewGame</Text>
+            ) : (
+              <Image
+                source={require('../../assets/GamePlayAssets/ResetButton.png')}
+              />
+            )}
           </Pressable>
-          {/* <Button title="Reset" onPress={handleReset} /> */}
         </View>
         <View style={styles.score}>
           <View>
@@ -389,7 +365,7 @@ export default function GameBoard() {
           {currentPlayer === 1 ? (
             <Image
               source={require('../../assets/GamePlayAssets/Player1Icon.png')}
-              style={[styles.player1, {width: 89, height: 130}]}
+              style={[styles.player1, {width: 120, height: 150}]}
             />
           ) : (
             <Image
@@ -400,7 +376,7 @@ export default function GameBoard() {
           {currentPlayer === 2 ? (
             <Image
               source={require('../../assets/GamePlayAssets/Player2Icon.png')}
-              style={[styles.player2, {width: 80, height: 122}]}
+              style={[styles.player2, {width: 100, height: 150}]}
             />
           ) : (
             <Image
@@ -496,12 +472,12 @@ const styles = StyleSheet.create({
   player1: {
     position: 'absolute',
     bottom: -115,
-    right: 110,
+    right: 95,
   },
   player2: {
     position: 'absolute',
     bottom: -110,
-    right: -170,
+    right: -180,
   },
   resetControls: {
     position: 'absolute',
