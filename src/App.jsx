@@ -5,6 +5,7 @@ import Instruction from './pages/Instruction';
 import GameInstruction from './pages/GameInstruction';
 import GamePlay from './pages/GamePlay';
 import About from './pages/About';
+import GameAbout from './pages/GameAbout';
 
 // export default function App() {
 //   return (
@@ -39,7 +40,6 @@ import Screen16 from './components/GameInstructionComponents/screen16';
 import Screen17 from './components/GameInstructionComponents/screen17';
 import AboutScreen2 from './components/AboutComponent/aboutscreen2';
 import AboutScreen3 from './components/GameAboutComponent/aboutscreen3';
-import GameAbout from './pages/GameAbout';
 
 const Stack = createNativeStackNavigator();
 
