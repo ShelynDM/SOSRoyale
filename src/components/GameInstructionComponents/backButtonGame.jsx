@@ -2,11 +2,11 @@ import React from 'react';
 import {Image, Pressable, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-export default function BackButton() {
+export default function GameBackButton() {
   const navigation = useNavigation();
 
   const handlePress = () => {
-    navigation.navigate('Home'); // Navigate to the home screen
+    navigation.navigate('GamePlay'); // Navigate to the home screen
   };
 
   return (

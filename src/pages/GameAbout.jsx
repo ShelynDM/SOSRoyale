@@ -1,24 +1,24 @@
 import React from 'react';
 import {ImageBackground, StatusBar, StyleSheet, View} from 'react-native';
-import BackButton from '../components/InstructionComponents/backButton';
-import NextTextButton from '../components/InstructionComponents/nextTextButton';
+import GameBackButton from '../components/GameAboutComponent/backButtonGame';
+import NextTextButton from '../components/GameAboutComponent/nextTextButton';
 import {useNavigation} from '@react-navigation/native';
 
-export default function Instruction() {
+export default function GameAbout() {
   const navigation = useNavigation();
 
-  const navigateToScreen2 = () => {
-    navigation.navigate('Screen2');
+  const navigateToAboutScreen3 = () => {
+    navigation.navigate('AboutScreen3');
   };
 
   return (
     <ImageBackground
-      source={require('../assets/InstructionPageAssets/InstructionsPage1.png')}
+      source={require('../assets/AboutPageAssets/AboutPage.png')}
       style={styles.backgroundImage}>
       <StatusBar backgroundColor={'#60e4f1'} />
       <View>
-        <BackButton onPress={() => navigation.goBack()} />
-        <NextTextButton onPress={navigateToScreen2} />
+        <GameBackButton onPress={() => navigation.goBack()} />
+        <NextTextButton onPress={navigateToAboutScreen3} />
       </View>
     </ImageBackground>
   );

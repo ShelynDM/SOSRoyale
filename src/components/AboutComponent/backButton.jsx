@@ -12,7 +12,7 @@ export default function BackButton() {
   return (
     <Pressable onPress={handlePress} style={styles.backButtonArea}>
       <Image
-        source={require('../../assets/InstructionPageAssets/BackButton.png')}
+        source={require('../../assets/AboutPageAssets/BackButton.png')}
         style={styles.backButtonImage}
       />
     </Pressable>

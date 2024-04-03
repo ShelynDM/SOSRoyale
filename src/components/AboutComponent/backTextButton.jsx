@@ -5,7 +5,7 @@ export default function BackTextButton({ onPress }) {
   return (
     <Pressable style={styles.buttonArea} onPress={onPress}>
       <Image
-        source={require('../../assets/InstructionPageAssets/BackTextButton.png')}
+        source={require('../../assets/AboutPageAssets/BackTextButton.png')}
         style={styles.buttonImage}
       />
     </Pressable>
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   buttonArea: {
     position: 'absolute',
-    top: 150,
+    top: 90,
     right: 60,
   },
 });
