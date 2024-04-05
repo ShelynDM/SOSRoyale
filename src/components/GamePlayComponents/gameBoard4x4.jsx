@@ -464,22 +464,33 @@ export default function GameBoard() {
           ))}
         </View>
 
+        {/* Reset button */}
+        <View style={styles.resetControls}>
+          <Pressable onPress={handleReset}>
+            {gameOver ? null : (
+              <Image
+                source={require('../../assets/GamePlayAssets/ResetButton.png')}
+              />
+            )}
+          </Pressable>
+        </View>
+
         {/* Alert the player to pick a letter */}
         <Pressable>
           {letter === '' ? (
             <View>
               <Image
                 source={require('../../assets/GamePlayAssets/rightArrow.png')}
-                style={{position: 'absolute', bottom: 350, left: 105}}
+                style={{position: 'absolute', bottom: 390, left: 105}}
               />
               <Image
                 source={require('../../assets/GamePlayAssets/leftArrow.png')}
-                style={{position: 'absolute', bottom: 350, right: 100}}
+                style={{position: 'absolute', bottom: 390, right: 100}}
               />
 
               <Image
                 source={require('../../assets/GamePlayAssets/letterAlert.png')}
-                style={{position: 'absolute', top: -350, right: -195}}
+                style={{position: 'absolute', top: -380, right: -195}}
               />
             </View>
           ) : null}
@@ -669,17 +680,6 @@ export default function GameBoard() {
               style={styles.d2_4Marker}
             />
           ) : null}
-        </View>
-
-        {/* Reset button */}
-        <View style={styles.resetControls}>
-          <Pressable onPress={handleReset}>
-            {gameOver ? null : (
-              <Image
-                source={require('../../assets/GamePlayAssets/ResetButton.png')}
-              />
-            )}
-          </Pressable>
         </View>
 
         {/* Score and player icons */}
