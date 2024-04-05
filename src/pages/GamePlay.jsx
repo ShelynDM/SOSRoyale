@@ -2,15 +2,11 @@ import React from 'react';
 import {
   Image,
   Pressable,
-  SafeAreaView,
   StyleSheet,
   View,
-  Text,
   ImageBackground,
   StatusBar,
-  Settings,
   Modal,
-  Button,
 } from 'react-native';
 import GameBoard from '../components/GamePlayComponents/gameBoard';
 import Menu from '../components/GamePlayComponents/Menu';
@@ -26,23 +22,17 @@ export default function GamePlay() {
 
   const handleInstructionsPress = () => {
     setIsModalVisible(false);
-    nav.navigate('Instruction');
-  };
-
-  const handleAboutPress = () => {
-    setIsModalVisible(false);
-    nav.navigate('About');
+    nav.navigate('GameInstruction');
   };
 
   const handleExitPress = () => {
     setIsModalVisible(false);
-    // call a function to reset the game here
     nav.navigate('Home');
   };
 
   return (
     <ImageBackground
-      source={require('../assets/GamePlayAssets/GamePlayBg.png')}
+      source={require('../assets/GamePlayAssets/GamePageBg.png')}
       style={styles.backgroundImage}>
       <StatusBar backgroundColor={'#60e4f1'} />
       <View>
@@ -68,7 +58,6 @@ export default function GamePlay() {
           <View>
             <Menu
               onInstructionsPress={handleInstructionsPress}
-              onAboutPress={handleAboutPress}
               onExitPress={handleExitPress}
               onResumePress={handleResumePress}
             />

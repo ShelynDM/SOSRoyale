@@ -4,18 +4,14 @@ import {
   ImageBackground,
   Pressable,
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 
 export default function Menu({
   onInstructionsPress,
-  onAboutPress,
   onExitPress,
   onResumePress,
 }) {
-  const nav = useNavigation();
   return (
     <View>
       <ImageBackground
@@ -30,11 +26,6 @@ export default function Menu({
           <Pressable onPress={onInstructionsPress} style={styles.menuButtons}>
             <Image
               source={require('../../assets/MenuAssets/InstructionButton.png')}
-            />
-          </Pressable>
-          <Pressable onPress={onAboutPress} style={styles.menuButtons}>
-            <Image
-              source={require('../../assets/MenuAssets/AboutButton.png')}
             />
           </Pressable>
           <Pressable onPress={onExitPress} style={styles.menuButtons}>
@@ -57,10 +48,11 @@ const styles = StyleSheet.create({
   },
 
   buttonsArea: {
-    top: 300,
+    top: 310,
   },
   menuButtons: {
     margin: 5,
     borderRadius: 25,
+    margin: 15,
   },
 });

@@ -7,13 +7,15 @@ import {
   View,
   Text,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import SMarker from '../../assets/GamePlayAssets/s.png';
 import OMarker from '../../assets/GamePlayAssets/o.png';
 
 export default function GameBoard() {
-  const [player1, setPlayer1] = React.useState(0); //player1 score
-  const [player2, setPlayer2] = React.useState(0); //player2 score
+  const nav = useNavigation();
+  const [player1, setPlayer1] = React.useState(0); //Player1 Score
+  const [player2, setPlayer2] = React.useState(0); //Player2 Score
   const [currentPlayer, setCurrentPlayer] = React.useState(1);
   const [gameOver, setGameOver] = React.useState(false);
   const [letter, setLetter] = React.useState('');
@@ -51,11 +53,10 @@ export default function GameBoard() {
       checkSOS();
     }
 
-    // If the cell is not empty, alert the player to pick a letter
+    // If the cell is empty, alert the player to pick a letter
     if (board[i][j] === '') {
       if (letter === '') {
         setCurrentPlayer(1);
-        alert('Pick a letter first (S or O).');
         return;
       }
     }
@@ -140,9 +141,6 @@ export default function GameBoard() {
       // Set the current player to the other player
       setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
     }
-
-    // Checking log of SOS count, should be removed later
-    console.log('SOS Count:', sosCount);
   };
 
   // Update the score of the player who formed the SOS
@@ -154,8 +152,6 @@ export default function GameBoard() {
     } else {
       setPlayer2(prevPlayer2 => prevPlayer2 + 1);
     }
-
-    console.log('Player1: ' + player1 + ' Player2: ' + player2);
   };
 
   // Determine the winner of the game
@@ -163,14 +159,19 @@ export default function GameBoard() {
     if (gameOver) {
       if (player1 > player2) {
         setCurrentPlayer(1);
-        alert('Player 1 wins!');
       } else if (player2 > player1) {
         setCurrentPlayer(2);
-        alert('Player 2 wins!');
       } else {
         setCurrentPlayer(null);
-        alert('It is a tie!');
       }
+      setH1(0);
+      setH2(0);
+      setH3(0);
+      setV1(0);
+      setV2(0);
+      setV3(0);
+      setD1(0);
+      setD2(0);
     }
   };
 
@@ -209,17 +210,8 @@ export default function GameBoard() {
     setD2(0);
   };
 
-  // Checking, should be removed later
-  console.log('h1=', h1, 'h2=', h2, 'h3=', h3);
-  console.log('v1=', v1, 'v2=', v2, 'v3=', v3);
-  console.log('d1=', d1, 'd2=', d2);
-  console.log(player1);
-  console.log(player2);
-
   // Every time the board changes, the function inside the useEffect will run
   React.useEffect(() => {
-    console.log('Player 1 Score:', player1);
-    console.log('Player 2 Score:', player2);
     handleGameOver();
   }, [board, gameOver]);
 
@@ -294,6 +286,54 @@ export default function GameBoard() {
           ))}
         </View>
 
+        {/* Alert for Pop Up */}
+        <Pressable>
+          {letter === '' ? (
+            <Image
+              source={require('../../assets/GamePlayAssets/letterAlert.png')}
+              style={{position: 'absolute', top: -300, right: -195}}
+            />
+          ) : null}
+        </Pressable>
+
+        {/* Winner Alert PopUp */}
+        <View>
+          {gameOver ? (
+            <ImageBackground
+              source={require('../../assets/AlertAssets/AlertBoard.png')}
+              style={{width: '100%', height: '100%', right: 170}}>
+              {player2 === player1 ? (
+                <Image
+                  source={require('../../assets/AlertAssets/DrawText.png')}
+                  style={{position: 'absolute', top: 70, left: 125}}
+                />
+              ) : player1 > player2 ? (
+                <Image
+                  source={require('../../assets/AlertAssets/Player1Text.png')}
+                  style={{position: 'absolute', top: 50, left: 60}}
+                />
+              ) : (
+                <Image
+                  source={require('../../assets/AlertAssets/Player2Text.png')}
+                  style={{position: 'absolute', top: 50, left: 60}}
+                />
+              )}
+              <Pressable onPress={handleReset}>
+                <Image
+                  source={require('../../assets/AlertAssets/PlayAgainButton.png')}
+                  style={{position: 'absolute', top: 150, left: 45}}
+                />
+              </Pressable>
+              <Pressable onPress={() => nav.navigate('Home')}>
+                <Image
+                  source={require('../../assets/AlertAssets/ExitButton.png')}
+                  style={{position: 'absolute', top: 250, left: 45}}
+                />
+              </Pressable>
+            </ImageBackground>
+          ) : null}
+        </View>
+
         {/* Line markers for SOS */}
         <View>
           {h1 === 1 ? (
@@ -349,12 +389,7 @@ export default function GameBoard() {
         {/* Reset button */}
         <View style={styles.resetControls}>
           <Pressable onPress={handleReset}>
-            {gameOver ? (
-              <Image
-                source={require('../../assets/GamePlayAssets/NewGameButton.png')}
-                style={{right: 15}}
-              />
-            ) : (
+            {gameOver ? null : (
               <Image
                 source={require('../../assets/GamePlayAssets/ResetButton.png')}
               />
@@ -370,10 +405,6 @@ export default function GameBoard() {
           <View>
             <Text style={styles.scoreText}>{player2}</Text>
           </View>
-        </View>
-        <View style={styles.playerText}>
-          <Text style={styles.text}>Player 1</Text>
-          <Text style={styles.text}>Player 2</Text>
         </View>
         <View>
           {currentPlayer === 1 ? (
@@ -461,6 +492,7 @@ const styles = StyleSheet.create({
   scoreText: {
     fontSize: 40,
     fontWeight: 'bold',
+    color: '#FFFFFF',
   },
   score: {
     position: 'absolute',
@@ -525,10 +557,7 @@ const styles = StyleSheet.create({
   grid: {
     width: 80,
     height: 80,
-    //borderWidth: 1,
-    //borderColor: 'pink',
     margin: 4,
-    //backgroundColor: '#1a5c03',
     alignItems: 'center',
     justifyContent: 'center',
   },
