@@ -386,20 +386,6 @@ export default function GameBoard() {
     setV4_2(0);
   };
 
-  // Checking, should be removed later
-  // console.log('h1_1=', h1_1, 'h1_2=', h1_2);
-  // console.log('h2_1=', h2_1, 'h2_2=', h2_2);
-  // console.log('h3_1=', h3_1, 'h3_2=', h3_2);
-  // console.log('h4_1=', h4_1, 'h4_2=', h4_2);
-  // console.log('v1_1=', v1_1, 'v1_2=', v1_2);
-  // console.log('v2_1=', v2_1, 'v2_2=', v2_2);
-  // console.log('v3_1=', v3_1, 'v3_2=', v3_2);
-  // console.log('v4_1=', v4_1, 'v4_2=', v4_2);
-  // console.log('d1_1=', d1_1, 'd1_2=', d1_2, 'd1_3=', d1_3, 'd1_4=', d1_4);
-  // console.log('d2_1=', d2_1, 'd2_2=', d2_2, 'd2_3=', d2_3, 'd2_4=', d2_4);
-  // console.log(player1);
-  // console.log(player2);
-
   // Every time the board changes, the function inside the useEffect will run
   React.useEffect(() => {
     // console.log('Player 1 Score:', player1);
@@ -478,12 +464,24 @@ export default function GameBoard() {
           ))}
         </View>
 
+        {/* Alert the player to pick a letter */}
         <Pressable>
           {letter === '' ? (
-            <Image
-              source={require('../../assets/GamePlayAssets/letterAlert.png')}
-              style={{position: 'absolute', top: -300, right: -195}}
-            />
+            <View>
+              <Image
+                source={require('../../assets/GamePlayAssets/rightArrow.png')}
+                style={{position: 'absolute', bottom: 350, left: 105}}
+              />
+              <Image
+                source={require('../../assets/GamePlayAssets/leftArrow.png')}
+                style={{position: 'absolute', bottom: 350, right: 100}}
+              />
+
+              <Image
+                source={require('../../assets/GamePlayAssets/letterAlert.png')}
+                style={{position: 'absolute', top: -350, right: -195}}
+              />
+            </View>
           ) : null}
         </Pressable>
 
