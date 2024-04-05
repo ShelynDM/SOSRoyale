@@ -8,7 +8,7 @@ import {
   StatusBar,
   Modal,
 } from 'react-native';
-import GameBoard from '../components/GamePlayComponents/gameBoard';
+import GameBoard from '../components/GamePlayComponents/gameBoard4x4';
 import Menu from '../components/GamePlayComponents/Menu';
 import {useNavigation} from '@react-navigation/native';
 
