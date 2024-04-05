@@ -20,7 +20,6 @@ import Screen15 from './components/GameInstructionComponents/screen15';
 import Screen16 from './components/GameInstructionComponents/screen16';
 import Screen17 from './components/GameInstructionComponents/screen17';
 import AboutScreen2 from './components/AboutComponent/aboutscreen2';
-import AboutScreen3 from './components/GameAboutComponent/aboutscreen3';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -138,11 +137,6 @@ export default function App() {
         <Stack.Screen
           name="AboutScreen2"
           component={AboutScreen2}
-          options={{headerShown: false, animation: 'none'}}
-        />
-        <Stack.Screen
-          name="AboutScreen3"
-          component={AboutScreen3}
           options={{headerShown: false, animation: 'none'}}
         />
       </Stack.Navigator>

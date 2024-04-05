@@ -685,12 +685,12 @@ export default function GameBoard() {
         </View>
 
         {/* Score and player icons */}
-        <View style={styles.score}>
+        <View>
           <View>
-            <Text style={styles.scoreText}>{player1}</Text>
+            <Text style={styles.scoreP1}>{player1}</Text>
           </View>
           <View>
-            <Text style={styles.scoreText}>{player2}</Text>
+            <Text style={styles.scoreP2}>{player2}</Text>
           </View>
         </View>
         <View>
@@ -870,20 +870,24 @@ const styles = StyleSheet.create({
     bottom: 210,
     left: 70,
   },
-  scoreText: {
+
+  scoreP1: {
+    position: 'absolute',
+    bottom: -80,
+    right: 55,
     fontSize: 40,
-    fontWeight: 'bold',
+    fontFamily: 'Eraser',
     color: '#FFFFFF',
   },
-  score: {
+  scoreP2: {
     position: 'absolute',
-    bottom: -82,
-    width: '100%',
-    flexDirection: 'row',
-    left: 90,
-    gap: 120,
-    textAlign: 'center',
+    bottom: -80,
+    right: -90,
+    fontSize: 40,
+    fontFamily: 'Eraser',
+    color: '#FFFFFF',
   },
+
   playerText: {
     position: 'absolute',
     bottom: -130,
