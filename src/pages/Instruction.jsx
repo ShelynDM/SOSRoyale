@@ -1,31 +1,24 @@
 import React from 'react';
-import {
-  Image,
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  ImageBackground,
-  StatusBar,
-  Settings,
-} from 'react-native';
+import {ImageBackground, StatusBar, StyleSheet, View} from 'react-native';
 import BackButton from '../components/InstructionComponents/backButton';
-import InstructionText from '../components/InstructionComponents/instructionText';
 import NextTextButton from '../components/InstructionComponents/nextTextButton';
-import BackTextButton from '../components/InstructionComponents/backTextButton';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Instruction() {
+  const navigation = useNavigation();
+
+  const navigateToScreen2 = () => {
+    navigation.navigate('Screen2');
+  };
+
   return (
     <ImageBackground
-      source={require('../assets/InstructionPageAssets/InstructionPageBackground.png')}
+      source={require('../assets/InstructionPageAssets/InstructionsPage1.png')}
       style={styles.backgroundImage}>
       <StatusBar backgroundColor={'#60e4f1'} />
       <View>
-        <BackButton />
-        <InstructionText />
-        <NextTextButton />
-        <BackTextButton />
+        <BackButton onPress={() => navigation.goBack()} />
+        <NextTextButton onPress={navigateToScreen2} />
       </View>
     </ImageBackground>
   );

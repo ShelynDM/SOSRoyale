@@ -1,9 +1,9 @@
 import React from 'react';
-import {Image, Pressable, StyleSheet, Text} from 'react-native';
+import {Image, Pressable, StyleSheet} from 'react-native';
 
-export default function NextTextButton() {
+export default function NextTextButton({onPress}) {
   return (
-    <Pressable style={styles.buttonArea}>
+    <Pressable style={styles.buttonArea} onPress={onPress}>
       <Image
         source={require('../../assets/InstructionPageAssets/NextTextButton.png')}
         style={styles.buttonImage}

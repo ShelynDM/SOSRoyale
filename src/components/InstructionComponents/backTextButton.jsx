@@ -1,9 +1,9 @@
 import React from 'react';
 import {Image, Pressable, StyleSheet, Text} from 'react-native';
 
-export default function BackTextButton() {
+export default function BackTextButton({onPress}) {
   return (
-    <Pressable style={styles.buttonArea}>
+    <Pressable style={styles.buttonArea} onPress={onPress}>
       <Image
         source={require('../../assets/InstructionPageAssets/BackTextButton.png')}
         style={styles.buttonImage}

@@ -1,23 +1,30 @@
 import React from 'react';
-import {Image, Pressable, StyleSheet, Text} from 'react-native';
+import {Image, Pressable, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
-export default function backButton() {
+export default function BackButton() {
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate('Home'); // Navigate to the home screen
+  };
+
   return (
-    <Pressable style={styles.buttonArea}>
+    <Pressable onPress={handlePress} style={styles.backButtonArea}>
       <Image
         source={require('../../assets/InstructionPageAssets/BackButton.png')}
-        style={styles.buttonImage}
+        style={styles.backButtonImage}
       />
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  buttonImage: {
+  backButtonImage: {
     width: 55,
     height: 43,
   },
-  buttonArea: {
+  backButtonArea: {
     position: 'absolute',
     backgroundColor: 'black',
     borderRadius: 15,
