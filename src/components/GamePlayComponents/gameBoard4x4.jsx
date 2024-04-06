@@ -684,10 +684,16 @@ export default function GameBoard() {
 
         {/* Score and player icons */}
         <View>
+          <Image
+            source={require('../../assets/GamePlayAssets/player1ScoreBoard.png')}
+            style={{position: 'absolute', bottom: -125, right: 32}}
+          />
+          <Text style={styles.scoreP1}>{player1}</Text>
           <View>
-            <Text style={styles.scoreP1}>{player1}</Text>
-          </View>
-          <View>
+            <Image
+              source={require('../../assets/GamePlayAssets/player1ScoreBoard.png')}
+              style={{position: 'absolute', bottom: -125, left: 39}}
+            />
             <Text style={styles.scoreP2}>{player2}</Text>
           </View>
         </View>

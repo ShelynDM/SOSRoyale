@@ -32,7 +32,7 @@ export default function GamePlay() {
 
   return (
     <ImageBackground
-      source={require('../assets/GamePlayAssets/GamePageBg.png')}
+      source={require('../assets/GamePlayAssets/GamePage.png')}
       style={styles.backgroundImage}>
       <StatusBar backgroundColor={'#60e4f1'} />
       <View>
