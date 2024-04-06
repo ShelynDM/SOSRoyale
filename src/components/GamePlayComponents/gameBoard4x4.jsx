@@ -499,38 +499,40 @@ export default function GameBoard() {
         {/* Winner Alert PopUp */}
         <View>
           {gameOver ? (
-            <ImageBackground
-              source={require('../../assets/AlertAssets/AlertBoard.png')}
-              style={{width: '100%', height: '100%', right: 170}}>
+            <View>
+              <Image
+                source={require('../../assets/AlertAssets/AlertBoard.png')}
+                style={{position: 'absolute', top: -410, left: -180}}
+              />
               {player2 === player1 ? (
                 <Image
                   source={require('../../assets/AlertAssets/DrawText.png')}
-                  style={{position: 'absolute', top: 70, left: 125}}
+                  style={{position: 'absolute', top: -330, left: -40}}
                 />
               ) : player1 > player2 ? (
                 <Image
                   source={require('../../assets/AlertAssets/Player1Text.png')}
-                  style={{position: 'absolute', top: 50, left: 60}}
+                  style={{position: 'absolute', top: -350, left: -105}}
                 />
               ) : (
                 <Image
                   source={require('../../assets/AlertAssets/Player2Text.png')}
-                  style={{position: 'absolute', top: 50, left: 60}}
+                  style={{position: 'absolute', top: -350, left: -105}}
                 />
               )}
               <Pressable onPress={handleReset}>
                 <Image
                   source={require('../../assets/AlertAssets/PlayAgainButton.png')}
-                  style={{position: 'absolute', top: 150, left: 45}}
+                  style={{position: 'absolute', top: 400, left: 80}}
                 />
               </Pressable>
               <Pressable onPress={() => nav.navigate('Home')}>
                 <Image
                   source={require('../../assets/AlertAssets/ExitButton.png')}
-                  style={{position: 'absolute', top: 250, left: 45}}
+                  style={{position: 'absolute', top: 500, left: 80}}
                 />
               </Pressable>
-            </ImageBackground>
+            </View>
           ) : null}
         </View>
 
