@@ -25,7 +25,7 @@ export default function Menu({
           </Pressable>
           <Pressable onPress={onInstructionsPress} style={styles.menuButtons}>
             <Image
-              source={require('../../assets/MenuAssets/InstructionButton.png')}
+              source={require('../../assets/MenuAssets/Instruction_Button.png')}
             />
           </Pressable>
           <Pressable onPress={onExitPress} style={styles.menuButtons}>
