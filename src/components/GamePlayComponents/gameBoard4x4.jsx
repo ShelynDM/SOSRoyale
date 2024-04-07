@@ -278,9 +278,6 @@ export default function GameBoard() {
       // Set the current player to the other player
       setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
     }
-
-    // Checking log of SOS count, should be removed later
-    //console.log('SOS Count:', sosCount);
   };
 
   // Update the score of the player who formed the SOS
@@ -292,8 +289,6 @@ export default function GameBoard() {
     } else {
       setPlayer2(prevPlayer2 => prevPlayer2 + 1);
     }
-
-    //console.log('Player1: ' + player1 + ' Player2: ' + player2);
   };
 
   // Determine the winner of the game
@@ -388,8 +383,6 @@ export default function GameBoard() {
 
   // Every time the board changes, the function inside the useEffect will run
   React.useEffect(() => {
-    // console.log('Player 1 Score:', player1);
-    // console.log('Player 2 Score:', player2);
     handleGameOver();
   }, [board, gameOver]);
 
@@ -693,7 +686,7 @@ export default function GameBoard() {
           <Text style={styles.scoreP1}>{player1}</Text>
           <View>
             <Image
-              source={require('../../assets/GamePlayAssets/player1ScoreBoard.png')}
+              source={require('../../assets/GamePlayAssets/player2ScoreBoard.png')}
               style={{position: 'absolute', bottom: -125, left: 39}}
             />
             <Text style={styles.scoreP2}>{player2}</Text>
